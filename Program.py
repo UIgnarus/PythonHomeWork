@@ -1,20 +1,8 @@
-"""
-Реализуйте алгоритм перемешивания списка.
-"""
-import random
+array = [int(i) for i in input().split()]
+for i in range(len(array)- 1):
+    array[i], array[i+1] = array[i+1], array[i]
 
-def mixing(input_list):
-    result_list = []
-    while input_list != []:
-        x = random.randrange(0,len(input_list))
-        result_list.append(input_list[x])
-        input_list.pop(x)
-    return result_list
-
-
-list = [i for i in input("list = ").split()]
-
-print(list)
-print(mixing(list))
+for i in range(len(array)):
+    print(int(array[i]), end = " ")
 
 
