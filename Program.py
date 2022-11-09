@@ -1,9 +1,13 @@
 array = [int(i) for i in input().split()]
-for i in range(len(array)):
-    if array[i] % 2:
-        if i < len(array) - 1:
-            array[i], array[i+1] = array[i+1], array[i]
+if array[0] % 2:
+    array[i], array[i+1] = array[i+1], array[i]
+for i in range(1, len(array)-1):
+    if not array[i] % 2:
+        array[i], array[i-1] = array[i-1], array[i]
     else:
-        if i != 0:
-            array[i], array[i-1] = array[i-1], array[i]
+        for j in range(i, len(array) -1):
+            array[j], array[j+1] = array[j+1], array[j]
+        break
+if not array[len(array)-1] % 2:
+    array[i], array[i-1] = array[i-1], array[i]
 print(*array)
