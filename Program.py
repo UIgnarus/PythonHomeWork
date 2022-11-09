@@ -4,5 +4,3 @@ for i in str(n):
     if i.isdigit():
         sum+=int(i)
 print(int(sum))
-
-
