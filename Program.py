@@ -1,6 +1,6 @@
-n = round(float(input()), 4)
+n = float(input())
 sum = 0
 for i in str(n):
-    if i.isdigit():
+    if i != ".":
         sum+=int(i)
 print(int(sum))
