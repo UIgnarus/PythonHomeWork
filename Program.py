@@ -1,18 +1,12 @@
-"""
-1 Напишите программу,
- которая принимает на вход число N 
- и выдает набор произведений чисел от 1 до N.
-Пример:
-- пусть N = 4,
- тогда [ 1, 2, 6, 24 ] (1, 1*2, 1*2*3, 1*2*3*4)
-"""
 
-n = int(input("n = "))
+n = int(input())
 
-def factorial_sequence(x):
+def factorial_seqance(x):
     a = [1]
-    for i in range(2,x+1):
+    result = "1"
+    for i in range(2, x + 1):
         a.append(i*a[i-2])
-    return(a)
+        result += " " + str(a[i-1]) 
+    return result
 
-print(factorial_sequence(n))
+print(factorial_seqance(n))
