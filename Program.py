@@ -11,3 +11,8 @@ n = int(input("n = "))
 list = {i: round((1+1/i)**i, 2) for i in range(1, n+ 1)}
 
 print(list)
+
+sum = float(0)
+for i in range(1, len(list)+1):
+    sum+= list[i]
+print(f"sum = {sum}")
