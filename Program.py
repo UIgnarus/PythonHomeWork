@@ -9,8 +9,12 @@
 
 from math import pi
 
-d =  float(input())
 
-def rounding(d):
-    for i in range(len(str(d))):
+def rounding_pi(d):
+    rounding = len(str(d)) - (len(str(int(d)))+1)
+    return round(pi, rounding)
+
+
+
+
         
