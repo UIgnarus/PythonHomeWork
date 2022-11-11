@@ -12,8 +12,7 @@
 
 def pairwise_sum(list):
     result_list = []
-    for i in range((len(list)//2) if (not len(list) % 2)
-                   else (len(list)//2 + 1)):
+    for i in range((len(list)//2+len(list)%2)):
         result_list.append(list[i]*list[-i-1])
     return result_list
 
