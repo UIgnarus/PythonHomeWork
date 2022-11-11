@@ -12,11 +12,11 @@
 def to_binary(x):
     list = []
     while x > 0:
-        list.append(x%2)
+        list.insert(0, x%2)
         x//=2
     result = ""
     for i in range(len(list)):
-        result+=str(list[-i-1])
+        result+=str(list[i])
     return int(result)
 
 def functional_testing():
