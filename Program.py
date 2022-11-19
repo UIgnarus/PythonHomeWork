@@ -42,19 +42,18 @@ def bot(all_candy):
         result = (all_candy % 29)
         if result == 0:
             result = random.randint(1, 28)
-            print(f"Bot выбрал {result}")
+            #print(f"Bot выбрал {result}")
             return result
-        print(f"Bot выбрал {result}")
+        #print(f"Bot выбрал {result}")
         return result
     else:
-        print(f"Bot выбрал {all_candy}")
+        #print(f"Bot выбрал {all_candy}")
         return all_candy
 
 
 def test_bot():
-    print(bot(667))
     n = 2021
-    print(f"\n\nCandy' = {n}")
+    print(f"\n\nCandy = {n}")
     i = 0
     while n > 0:
         print(f"Bot '{i+1}' = {bot(n)}")
