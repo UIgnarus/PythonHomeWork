@@ -1,5 +1,4 @@
 import os
-import math
 import random
 def clear(): return os.system('cls')
 
@@ -8,13 +7,7 @@ def start():
     clear()
     print("=======================\n" +
           "========28 конфет!=====\n" +
-          "=======================\n" +
-          "press enter\n")
-    launch = input("-->")
-    if not launch == "":
-        launch = False
-    else:
-        launch = True
+          "=======================\n")
 
 
 def game_mode():
@@ -40,24 +33,26 @@ def player_name(mode):
 
 
 def bot(all_candy):
-    if all_candy > 56:
-        result = (all_candy%28) + 1
+    # if all_candy > 56:
+    #     result = (all_candy%28) + 1
+    #     print(f"Bot выбрал {result}")
+    #     return result
+    # else:
+    if all_candy > 28:
+        result = (all_candy % 29)
+        if result == 0:
+            result = random.randint(1, 28)
+            print(f"Bot выбрал {result}")
+            return result
         print(f"Bot выбрал {result}")
         return result
     else:
-        if all_candy > 29:
-            result = (all_candy%28) - 1
-            print(f"Bot выбрал {result}")
-            return result
-        elif all_candy > 28:
-            return 1
-        else:
-            print(f"Bot выбрал {all_candy}")
-            return all_candy
+        print(f"Bot выбрал {all_candy}")
+        return all_candy
 
 
 def test_bot():
-
+    print(bot(667))
     n = 2021
     print(f"\n\nCandy' = {n}")
     i = 0
@@ -69,35 +64,62 @@ def test_bot():
         i %= 2
 
 
-def player_turn(player):
-    print(f"Ход игрока {player}: ", end="")
-    turn = int(input())
-    if 1 <= turn <= 28:
-        return turn
-    else:
-        print("Не то количество конфет!")
-        player_turn(player)
+def player_turn(player, all_candy):
+    while True:
+        if all_candy > 28:
+            print(f"Ход игрока {player}: ", end="")
+            turn = int(input())
+            if 1 <= turn <= 28:
+                return turn
+            else:
+                print("Не то количество конфет!")
+        else:
+            print(f"Ход игрока {player}: ", end="")
+            turn = int(input())
+            if 1 <= turn <= all_candy:
+                return turn
+            else:
+                print("Не то количество конфет!")
 
 
 def candy_print(x): return print(f"Конфет осталось - {x}")
-def victories(x): return print(f"Победил {x}!")
+def victories(x): return print(f"\n\nПобедил игрок {x}!")
+
+
+def goes_first(player_1, player_2):
+    while True:
+        print("Выберите кто ходит первый!\n"
+              + f"(1) - игрок {player_1}\n"
+              + f"(2) - игрок {player_2}\n"
+              + "(3) - Рандом\n")
+        turn = int(input("-->"))
+        if 1 <= turn <= 3:
+            return turn
+        else:
+            print("Не то количество конфет!")
 
 
 def candy_game(player_1, player_2):
     clear()
-    all_candy = 2021
-    first = random.randint(0, 2)
-    print(f"Первым ходит {player_1}" if first else f"Первым ходит {player_2}")
+    all_candy = 229
+    first = goes_first(player_1, player_2)
+    clear()
+    if first == 3:
+        first = random.randint(0, 1)
+    else:
+        first %= 2
+    print(f"Первым ходит {player_1}" if first
+          else f"Первым ходит {player_2}")
     if not player_2 == "Bot":
         while all_candy > 0:
-            clear()
+            print("\n")
             if first:
                 candy_print(all_candy)
-                all_candy -= player_turn(player_1)
+                all_candy -= player_turn(player_1, all_candy)
                 first = False
             else:
                 candy_print(all_candy)
-                all_candy -= player_turn(player_2)
+                all_candy -= player_turn(player_2, all_candy)
                 first = True
         if first:
             victories(player_2)
@@ -105,14 +127,16 @@ def candy_game(player_1, player_2):
             victories(player_1)
     else:
         while all_candy > 0:
+            print("\n")
             if first:
                 candy_print(all_candy)
-                all_candy -= player_turn(player_1)
+                all_candy -= player_turn(player_1, all_candy)
                 first = False
-                clear()
+                
             else:
+                clear()
                 candy_print(all_candy)
-                all_candy -= bot(all_candy)  
+                all_candy -= bot(all_candy)
                 first = True
         if first:
             victories(player_2)
@@ -123,10 +147,11 @@ def candy_game(player_1, player_2):
 def main():
     start()
     mode = game_mode()
+    clear()
     player_1, player_2 = player_name(mode)
     candy_game(player_1, player_2)
 
 
 clear()
-#test_bot()
-main()
+test_bot()
+#main()
