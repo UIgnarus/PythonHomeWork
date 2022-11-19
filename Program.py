@@ -33,21 +33,16 @@ def player_name(mode):
 
 
 def bot(all_candy):
-    # if all_candy > 56:
-    #     result = (all_candy%28) + 1
-    #     print(f"Bot выбрал {result}")
-    #     return result
-    # else:
     if all_candy > 28:
         result = (all_candy % 29)
         if result == 0:
             result = random.randint(1, 28)
-            #print(f"Bot выбрал {result}")
+            print(f"Bot выбрал {result}")
             return result
-        #print(f"Bot выбрал {result}")
+        print(f"Bot выбрал {result}")
         return result
     else:
-        #print(f"Bot выбрал {all_candy}")
+        print(f"Bot выбрал {all_candy}")
         return all_candy
 
 
