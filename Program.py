@@ -95,20 +95,6 @@ def find_win(f=field):
     return 0
 
 
-def find_in_line(amount_x, amount_o):
-    for line in win_list:
-        value = line_to_value(line)
-        x = 0
-        o = 0
-        for i in range(3):
-            if value[i] == "x":
-                x += 1
-            if value[i] == "o":
-                o += 1
-        if x == amount_x and o == amount_o:
-            return line
-
-
 def player_turn(symbol):
     while True:
         text = "Введите координату поля\n"\
@@ -123,11 +109,61 @@ def player_turn(symbol):
             print("Уже занято!")
 
 
-def line_recording(line, symbol):
+def find_in_line(amount_x, amount_o):
+    for line in win_list:
+        value = line_to_value(line)
+        x = 0
+        o = 0
+        for i in range(3):
+            if value[i] == "x":
+                x += 1
+            if value[i] == "o":
+                o += 1
+        if x == amount_x and o == amount_o:
+            return line
+
+
+def line_recording(l, symbol):
     for i in range(0, 3):
-        if line[i] == "-":
-            line[i] = symbol
+        if field[l[i][0]][l[i][1]] == "-":
+            field[l[i][0]][l[i][1]] = symbol
             break
+
+
+# clear()
+# print(find_in_line(0, 2))
+# print_pole()
+# line_recording(find_in_line(0, 2), "o")
+# print_pole()
+
+
+def bot():
+    in_line = find_in_line(0, 2)
+    if in_line != None:
+        line_recording(in_line, "o")
+        return None
+    in_line = find_in_line(2, 0)
+    if in_line != None:
+        line_recording(in_line, "o")
+        return None
+    if field[1][1] == "-":
+        field[1][1] = "o"
+        return None
+    in_line = find_in_line(1, 0)
+    if in_line != None:
+        line_recording(in_line, "o")
+        return None
+    in_line = find_in_line(1, 1)
+    if in_line != None:
+        line_recording(in_line, "o")
+        return None
+
+
+def test_bot():
+    clear()
+    print_pole()
+    bot()
+    print_pole()
 
 
 def print_player(x, s): print(f"\nХод игрока {x} - ({s})\n")
@@ -199,9 +235,7 @@ def tic_tac_toe(player_1, player_2):
                 clear()
                 first = False
             else:
-                print_pole()
-                print_player(player_2, "o")
-                player_turn("o")
+                bot()
                 first = True
                 status = find_win()
                 if status == 1:
@@ -232,3 +266,4 @@ def main():
 
 main()
 # print(find_win())
+# test_bot()
